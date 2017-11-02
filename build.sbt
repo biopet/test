@@ -14,7 +14,7 @@ enablePlugins(PreprocessPlugin)
 
 preprocessVars in Preprocess := Map("VERSION" -> version.value)
 
-sourceDirectory in LaikaSite := new File("docs")
+sourceDirectory in LaikaSite := file("docs")
 sourceDirectories in Laika := Seq((sourceDirectory in LaikaSite).value)
 
 
