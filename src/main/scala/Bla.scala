@@ -34,5 +34,5 @@ object Bla {
       |Paragraph2.
     """.stripMargin
 
-  val fileName = "README.md"
+  val fileName = "docs/INDEX.MD"
 }
