@@ -1,6 +1,6 @@
 import java.io._
 object Bla {
-  def main(): Unit = {
+  def main(args: Array[String]): Unit = {
     generateTextFile(documentation,fileName)
   }
 
