@@ -2,11 +2,9 @@ name := "test"
 
 version := "0.1"
 
-sbt.version := 0.13
+import LaikaKeys._
 
 scalaVersion := "2.11.11"
-
-libraryDependencies += "org.planet42" %% "laika-core" % "0.7.0"
 
 enablePlugins(LaikaSitePlugin)
 enablePlugins(SiteScaladocPlugin)
@@ -26,3 +24,7 @@ siteSubdirName in SiteScaladoc := s"${version.value}/api"
 excludeFilter in ghpagesCleanSite := new FileFilter{
     def accept(f: File) = true
   }
+
+
+LaikaPlugin.defaults
+sourceDirectories in Laika := Seq(new File("docs"))
