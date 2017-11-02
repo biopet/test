@@ -14,6 +14,9 @@ enablePlugins(PreprocessPlugin)
 
 preprocessVars in Preprocess := Map("VERSION" -> version.value)
 
+sourceDirectory in LaikaSite := new File("docs")
+sourceDirectories in Laika := Seq((sourceDirectory in LaikaSite).value)
+
 
 git.remoteRepo := "git@github.com:biopet/test.git"
 ghpagesRepository := file("target/gh")
@@ -26,5 +29,5 @@ excludeFilter in ghpagesCleanSite := new FileFilter{
   }
 
 
-LaikaPlugin.defaults
-sourceDirectories in Laika := Seq(new File("docs"))
+
+
