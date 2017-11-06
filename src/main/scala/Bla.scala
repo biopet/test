@@ -1,14 +1,17 @@
 import java.io._
 
 import scala.collection.JavaConverters._
+import scala.collection.mutable.ListBuffer
 object Bla {
   def main(args: Array[String]): Unit = {
     Documentation.generatePages()
   }
-
+  val docsDir: String = "docs/"
   class DocPage(fileName: String,
                  text: String
+
                 ) {
+    def showFilename: String = fileName
     def generateTextFile(): Unit = {
       val printWriter = new PrintWriter(new File(fileName))
       printWriter.write(text)
@@ -17,9 +20,9 @@ object Bla {
     }
 
   object Documentation {
-
+    val title = "Bla manual"
     val readme: DocPage = {
-      new DocPage("docs/index.md",
+      new DocPage(docsDir + "index.md",
         """This is a very long string.
           |It contains newlines.
           |It is Markdown.
@@ -43,7 +46,7 @@ object Bla {
       )
     }
     val manual: DocPage = {
-      new DocPage("docs/manual.md",
+      new DocPage(docsDir + "manual.md",
         """# Manual
         |
         |Some information
@@ -58,10 +61,31 @@ object Bla {
       )
       }
     val docPages: List[DocPage]= List(readme, manual)
+    val navigationOrder: String = docPages.toString()
     def generatePages(): Unit = {
       for (docPage <- docPages){
         docPage.generateTextFile()
       }
+      generateConfig
+    }
+    def generateConfig: Unit = {
+      val printWriter = new PrintWriter(new File(docsDir + "directory.conf"))
+      def navigationOrder: String = {
+        val orderList = new ListBuffer[String]
+        for (docPage <-docPages) {
+        orderList.append(docPage.showFilename)
+        }
+        orderList mkString("\n")
+        }
+
+      val config: String = {
+        "title = \"" + title + "\"\n" +
+        "navigationOrder = [\n" +
+        navigationOrder +
+        "\n]"
+        }
+      printWriter.write(config)
+      printWriter.close()
     }
   }
 }
