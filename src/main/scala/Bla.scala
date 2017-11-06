@@ -24,14 +24,16 @@ object Bla {
     val readme: DocPage = {
       new DocPage(docsDir + "index.md",
         """This is a very long string.
+          |
           |It contains newlines.
+          |
           |It is Markdown.
           |
           |# YES MARKDOWN
           |
           |Who would have thought that?
           |It also contains
-          |```
+          |```bash
           |arbitrary code
           |```
           |And some more `stuff` like that. Such as:
@@ -42,7 +44,7 @@ object Bla {
           |Paragraph1
           |
           |Paragraph2.
-        """.stripMargin
+        """.stripMargin('|')
       )
     }
     val manual: DocPage = {
