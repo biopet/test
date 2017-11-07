@@ -23,20 +23,26 @@ object Bla {
     val title = "Bla manual"
     val readme: DocPage = {
       new DocPage(docsDir + "index.md",
-        """This is a very long string.
+        """
+          |# Markdown test
+          |
+          |This is a very long string.
           |
           |It contains newlines.
           |
           |It is Markdown.
           |
-          |# YES MARKDOWN
-          |
-          |Who would have thought that?
           |It also contains
-          |```bash
-          |arbitrary code
-          |```
+          |
+          |    arbitrary code
+          |    Should be indented
+          |    Laika does not (yet) support
+          |    github flavoured markdown
+          |
+          |
+          |
           |And some more `stuff` like that. Such as:
+          |
           |* This
           |* Stuff
           |* ReST is better
@@ -69,6 +75,7 @@ object Bla {
         docPage.generateTextFile()
       }
       generateConfig
+      generateTemplateHTML
     }
     def generateConfig: Unit = {
       val printWriter = new PrintWriter(new File(docsDir + "directory.conf"))
@@ -89,5 +96,53 @@ object Bla {
       printWriter.write(config)
       printWriter.close()
     }
+    def generateTemplateHTML: Unit = {
+      val printWriter = new PrintWriter(new File(docsDir + "default.template.html"))
+
+      def template: String =
+        """
+          |<!DOCTYPE html>
+          |<html lang="en">
+          |  <head>
+          |    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+          |    <meta charset="utf-8">
+          |
+          |    <title>Test</title>
+          |
+          |  </head>
+          |
+          |  <body data-spy="scroll" data-target=".toc" data-offset="200">
+          |
+          |
+          |  <div class="container">
+          |
+          |    <!-- Docs nav
+          |    ================================================== -->
+          |    <div class="row">
+          |      <div class="span4 toc" >
+          |
+          |        <ul class="nav nav-list affix">
+          |
+          |          @:toc.
+          |        </ul>
+          |
+          |      </div>
+          |
+          |      <div class="span8" id="top">
+          |
+          |        {{document.content}}
+          |
+          |      </div>
+          |    </div>
+          |
+          |  </div>
+          |
+          |</body></html>
+        """.stripMargin
+
+      printWriter.write(template)
+      printWriter.close()
+    }
+
   }
 }

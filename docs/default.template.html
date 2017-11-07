@@ -1,17 +1,39 @@
-{% 
-  autonumbering {
-    scope: sections
-    depth: 2      
-  }
-%}  
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <title>{{document.title}}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+
+    <title>Test</title>
+
   </head>
-  <body>
-    @:toc.
-    <div class="content">
-      {{document.content}}
+
+  <body data-spy="scroll" data-target=".toc" data-offset="200">
+
+
+  <div class="container">
+
+    <!-- Docs nav
+    ================================================== -->
+    <div class="row">
+      <div class="span4 toc" >
+
+        <ul class="nav nav-list affix">
+
+          @:toc.
+        </ul>
+
+      </div>
+
+      <div class="span8" id="top">
+
+        {{document.content}}
+
+      </div>
     </div>
-  </body>
-</html>
+
+  </div>
+
+</body></html>
+        
