@@ -3,6 +3,7 @@ name := "test"
 version := "0.1"
 
 import LaikaKeys._
+import org.apache.xalan.xsltc.cmdline
 
 scalaVersion := "2.11.11"
 
@@ -11,6 +12,8 @@ enablePlugins(SiteScaladocPlugin)
 enablePlugins(GhpagesPlugin)
 enablePlugins(PreprocessPlugin)
 
+//def createMarkdownDocs(docsDir: File): Seq[File] = {
+//List(new File("bla")) }
 
 preprocessVars in Preprocess := Map("VERSION" -> version.value)
 
@@ -30,4 +33,7 @@ excludeFilter in ghpagesCleanSite := new FileFilter{
 
 
 
+lazy val generateMarkdownDocs = taskKey[Unit]("Generate markdown files")
+
+fullRunTask(generateMarkdownDocs, Laika, "Random")
 
