@@ -33,7 +33,6 @@ excludeFilter in ghpagesCleanSite := new FileFilter{
     def accept(f: File) = true
   }
 
-
 lazy val generateDocs = taskKey[Unit]("Generate documentation files")
 
 fullRunTask(generateDocs, Test , "Documentation", docsDir)
