@@ -99,18 +99,13 @@ object Tool {
         printWriter.close()
       }
       def generateTemplateHTML: Unit = {
-        val printWriter = new PrintWriter(new File(docsDir + "default.template.html"))
+        val outputFile = new File(docsDir + "default.template.html")
+        outputFile.createNewFile()
+        val printWriter = new PrintWriter(outputFile)
 
-        def template: String = {
-
-          val htmlSource = getClass.getResourceAsStream("/default.template.html")
-          val lines: Iterator[String] = Source.fromInputStream(htmlSource).getLines
-          val result = new StringBuffer()
-          lines.foreach(line => result.append(line))
-          result.toString
-        }
-        print(template)
-        printWriter.write(template)
+        val htmlSource = getClass.getResourceAsStream("/default.template.html")
+        val lines: Iterator[String] = Source.fromInputStream(htmlSource).getLines
+        lines.foreach(line => printWriter.println(line))
         printWriter.close()
       }
 
