@@ -32,8 +32,13 @@ excludeFilter in ghpagesCleanSite := new FileFilter{
   }
 
 
-
 lazy val generateMarkdownDocs = taskKey[Unit]("Generate markdown files")
 
-fullRunTask(generateMarkdownDocs, Laika, "Random")
+fullRunTask(generateMarkdownDocs, Test , "Bla")
 
+lazy val taskInTask = taskKey[Unit]("Run from inside")
+
+fullRunTask(taskInTask, Test , "Random.Inside")
+
+lazy val something = taskKey[Unit]("Dummy")
+fullRunTask(something, Test , "Dummy")
