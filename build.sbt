@@ -17,7 +17,7 @@ enablePlugins(PreprocessPlugin)
 
 preprocessVars in Preprocess := Map("VERSION" -> version.value)
 
-sourceDirectory in LaikaSite := file("docs")
+sourceDirectory in LaikaSite := file("target/markdown")
 sourceDirectories in Laika := Seq((sourceDirectory in LaikaSite).value)
 
 
@@ -43,3 +43,4 @@ fullRunTask(taskInTask, Test , "Random.Inside")
 lazy val something = taskKey[Unit]("Dummy")
 fullRunTask(something, Test , "Dummy")
 
+makeSite <<= makeSite.triggeredBy(something)

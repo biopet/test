@@ -4,13 +4,16 @@ import scala.collection.JavaConverters._
 import scala.collection.mutable.ListBuffer
 object Bla {
   def main(args: Array[String]): Unit = {
+
     Documentation.generatePages()
   }
 
   def generatePages(): Unit = {
+    val directory = new File(docsDir)
+    directory.mkdir()
     Documentation.generatePages()
   }
-  val docsDir: String = "docs/"
+  val docsDir: String = "target/markdown/"
   class DocPage(fileName: String,
                  text: String
 
