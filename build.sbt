@@ -42,3 +42,4 @@ fullRunTask(taskInTask, Test , "Random.Inside")
 
 lazy val something = taskKey[Unit]("Dummy")
 fullRunTask(something, Test , "Dummy")
+

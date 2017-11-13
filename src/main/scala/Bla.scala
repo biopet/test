@@ -6,6 +6,10 @@ object Bla {
   def main(args: Array[String]): Unit = {
     Documentation.generatePages()
   }
+
+  def generatePages(): Unit = {
+    Documentation.generatePages()
+  }
   val docsDir: String = "docs/"
   class DocPage(fileName: String,
                  text: String
