@@ -17,7 +17,9 @@ enablePlugins(PreprocessPlugin)
 
 preprocessVars in Preprocess := Map("VERSION" -> version.value)
 
-sourceDirectory in LaikaSite := file("target/markdown")
+val docsDir: String="target/markdown/"
+
+sourceDirectory in LaikaSite := file(docsDir)
 sourceDirectories in Laika := Seq((sourceDirectory in LaikaSite).value)
 
 
@@ -32,15 +34,8 @@ excludeFilter in ghpagesCleanSite := new FileFilter{
   }
 
 
-lazy val generateMarkdownDocs = taskKey[Unit]("Generate markdown files")
+lazy val generateDocs = taskKey[Unit]("Generate documentation files")
 
-fullRunTask(generateMarkdownDocs, Test , "Bla")
+fullRunTask(generateDocs, Test , "Documentation", docsDir)
 
-lazy val taskInTask = taskKey[Unit]("Run from inside")
-
-fullRunTask(taskInTask, Test , "Random.Inside")
-
-lazy val something = taskKey[Unit]("Dummy")
-fullRunTask(something, Test , "Dummy")
-
-makeSite <<= makeSite.triggeredBy(something)
+makeSite <<= makeSite.triggeredBy(generateDocs)
