@@ -2,6 +2,7 @@ import java.io._
 
 import scala.collection.JavaConverters._
 import scala.collection.mutable.ListBuffer
+import scala.io.Source
 object Tool {
   def main(args: Array[String]): Unit = {
     val docsDir: String = args(0)
@@ -100,47 +101,15 @@ object Tool {
       def generateTemplateHTML: Unit = {
         val printWriter = new PrintWriter(new File(docsDir + "default.template.html"))
 
-        def template: String =
-          """
-            |<!DOCTYPE html>
-            |<html lang="en">
-            |  <head>
-            |    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            |    <meta charset="utf-8">
-            |
-            |    <title>Test</title>
-            |
-            |  </head>
-            |
-            |  <body data-spy="scroll" data-target=".toc" data-offset="200">
-            |
-            |
-            |  <div class="container">
-            |
-            |    <!-- Docs nav
-            |    ================================================== -->
-            |    <div class="row">
-            |      <div class="span4 toc" >
-            |
-            |        <ul class="nav nav-list affix">
-            |
-            |          @:toc.
-            |        </ul>
-            |
-            |      </div>
-            |
-            |      <div class="span8" id="top">
-            |
-            |        {{document.content}}
-            |
-            |      </div>
-            |    </div>
-            |
-            |  </div>
-            |
-            |</body></html>
-          """.stripMargin
+        def template: String = {
 
+          val htmlSource = getClass.getResourceAsStream("/default.template.html")
+          val lines: Iterator[String] = Source.fromInputStream(htmlSource).getLines
+          val result = new StringBuffer()
+          lines.foreach(line => result.append(line))
+          result.toString
+        }
+        print(template)
         printWriter.write(template)
         printWriter.close()
       }

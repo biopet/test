@@ -11,7 +11,7 @@ enablePlugins(LaikaSitePlugin)
 enablePlugins(SiteScaladocPlugin)
 enablePlugins(GhpagesPlugin)
 enablePlugins(PreprocessPlugin)
-
+enablePlugins(SbtTwirl)
 //def createMarkdownDocs(docsDir: File): Seq[File] = {
 //List(new File("bla")) }
 
@@ -38,3 +38,7 @@ lazy val generateDocs = taskKey[Unit]("Generate documentation files")
 fullRunTask(generateDocs, Test , "Documentation", docsDir)
 
 makeSite <<= makeSite.triggeredBy(generateDocs)
+
+lazy val testCopy = taskKey[Unit]("Generate documentation files")
+
+fullRunTask(testCopy, Test , "Test")
