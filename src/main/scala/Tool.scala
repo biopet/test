@@ -126,8 +126,8 @@ object Tool {
       }
       generateConfig
       resourceToFile("/default.template.html", docsDir + "default.template.html")
-      resourceToFile("/bootstrap.css", docsDir + "/css/bootstrap.css")
-      resourceToFile("/docs.css", docsDir + "/css/docs.css")
+      resourceToFile("/bootstrap.css", docsDir + "bootstrap.css")
+      resourceToFile("/docs.css", docsDir + "docs.css")
     }
 
 
