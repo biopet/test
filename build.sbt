@@ -38,7 +38,7 @@ lazy val generateDocs = taskKey[Unit]("Generate documentation files")
 fullRunTask(generateDocs, Test , "Documentation", docsDir)
 
 makeSite <<= makeSite.triggeredBy(generateDocs)
-
+makeSite <<= makeSite dependsOn(generateDocs)
 lazy val testCopy = taskKey[Unit]("Generate documentation files")
 
 fullRunTask(testCopy, Test , "Test")
