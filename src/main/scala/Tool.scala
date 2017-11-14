@@ -98,6 +98,17 @@ object Tool {
         printWriter.write(config)
         printWriter.close()
       }
+
+      def resourceToFile(resource: String, output: String): Unit = {
+        val outputFile = new File(output)
+        outputFile.createNewFile()
+        val printWriter = new PrintWriter(outputFile)
+
+        val source = getClass.getResourceAsStream(resource)
+        val lines: Iterator[String] = Source.fromInputStream(source).getLines
+        lines.foreach(line => printWriter.println(line))
+        printWriter.close()
+      }
       def generateTemplateHTML: Unit = {
         val outputFile = new File(docsDir + "default.template.html")
         outputFile.createNewFile()
@@ -114,7 +125,9 @@ object Tool {
         docPage.generateTextFile()
       }
       generateConfig
-      generateTemplateHTML
+      resourceToFile("/default.template.html", docsDir + "default.template.html")
+      resourceToFile("/bootstrap.css", docsDir + "/css/bootstrap.css")
+      resourceToFile("/docs.css", docsDir + "/css/docs.css")
     }
 
 
