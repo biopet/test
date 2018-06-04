@@ -12,7 +12,7 @@ pipeline {
             steps {
                 checkout scm
                 sh 'sleep 1000'
-                sh 'echo bla'
+                sh 'echo bla2'
             }
         }
     }
