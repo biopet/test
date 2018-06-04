@@ -5,14 +5,14 @@ pipeline {
         }
     }
     triggers {
-        pollSCM('H/1 * * * *')
+        pollSCM('H/2 * * * *')
     }
     stages {
         stage('Run') {
             steps {
                 checkout scm
-                sh 'sleep 300'
-                sh 'echo bla2'
+                sh 'sleep 500'
+                sh 'echo bla'
             }
         }
     }
