@@ -11,8 +11,8 @@ pipeline {
         stage('Run') {
             steps {
                 checkout scm
-                sh 'sleep 500'
-                sh 'echo bla2'
+                sh 'sleep 1000'
+                sh 'echo bla'
             }
         }
     }
